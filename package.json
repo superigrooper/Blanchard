@@ -4,10 +4,7 @@
   "description": "Мой итоговый проект по курсу 'Базовая вёрстка'",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "set NODE_ENV=dev && gulp dev",
-    "prod": "set NODE_ENV=prod && gulp prod",
-    "clean": "gulp clean"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Виталий Терентьев-Сучков",
   "license": "ISC",
@@ -30,6 +27,7 @@
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify-es": "^3.0.0",
-    "sass": "^1.53.0"
+    "sass": "^1.53.0",
+    "yargs": "^17.5.1"
   }
 }

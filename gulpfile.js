@@ -13,31 +13,30 @@ const del = require('del');
 const gulpif = require('gulp-if');
 const sass = require('gulp-sass')(require('sass'));
 
-
-const NODE_ENV = process.env.NODE_ENV.trim();
-const dev = (NODE_ENV === 'dev');
-const prod = (NODE_ENV === 'prod');
+const isProd = process.argv.includes('--prod');
+const isDev = !isProd;
+console.log(isProd);
 
 // clean
 const clean = () => {
-  return del(['dist'])
+  return del(['./dist'])
 }
 
 // styles
 const styles = () => {
-  return src('./src/scss/**/*.scss')
-    .pipe(gulpif(dev, sourcemaps.init()))
-    .pipe(sass().on('error', sass.logError))
+  return src('./src/scss/main.scss')
+    .pipe(gulpif(isDev, sourcemaps.init()))
+    .pipe(sass())
     .pipe(concat('style.css'))
     .pipe(autoprefixer({ 
         overrideBrowserslist: ['last 10 versions'],
         grid: true 
       }
     ))
-    .pipe(cleanCSS({ level: 2 }))
-    .pipe(gulpif(dev, sourcemaps.write()))
-    .pipe(gulpif(dev, dest('./src/css')))
-    .pipe(gulpif(prod, dest('./dist/css')))
+    .pipe(gulpif(isProd, cleanCSS({ level: 2 })))
+    .pipe(gulpif(isDev, sourcemaps.write()))
+    .pipe(gulpif(isDev, dest('./src/css')))
+    .pipe(gulpif(isProd, dest('./dist/css')))
     .pipe(browserSync.stream())
 }
 
@@ -45,7 +44,7 @@ const styles = () => {
 const html = () => {
   return src('./src/index.html')
     .pipe(htmlMin({ collapseWhitespace: true }))
-    .pipe(gulpif(prod, dest('./dist')))
+    .pipe(gulpif(isProd, dest('./dist')))
     .pipe(browserSync.stream())
 }
 
@@ -64,15 +63,15 @@ const images = () => {
 // scriprs
 const scripts = () => {
   return src('./src/js/modules/**/*.js')
-  .pipe(gulpif(dev, sourcemaps.init()))
+  .pipe(gulpif(isDev, sourcemaps.init()))
   .pipe(babel({
     presets: ['@babel/env']
   }))
   .pipe(concat('main.min.js'))
   .pipe(uglify().on('error', notify.onError()))
-  .pipe(gulpif(dev, sourcemaps.write()))
-  .pipe(gulpif(dev, dest('./src/js')))
-  .pipe(gulpif(prod, dest('./dist/js')))
+  .pipe(gulpif(isDev, sourcemaps.write()))
+  .pipe(gulpif(isDev, dest('./src/js')))
+  .pipe(gulpif(isProd, dest('./dist/js')))
   .pipe(browserSync.stream())
 }
 
@@ -117,5 +116,8 @@ exports.scripts = scripts;
 exports.images = images;
 exports.clean = clean;
 
-exports.prod = series(clean, styles, html, scripts, libs, fonts, icons, favicon,images);
+// run gulp --prod
+exports.default = series(clean, styles, html, scripts, libs, icons, fonts, favicon, images);
+
+// run gulp dev
 exports.dev = parallel(html, styles, scripts, watchFiles);
