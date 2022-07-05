@@ -1,1 +1,10 @@
-h1 hello
+header.header 
+  ._top
+    .header__container.container 
+      include ../components/burger/_burger.pug
+      a.header__logo(href="#" aria-lable="Логотип сайта")
+        picture 
+          source(srcset="./img/icons/common/logo-320.svg" media="(max-width: 576px)")
+          source(srcset="./img/icons/common/logo-320.svg" media="(max-width: 576px)")
+          img(src="./img/icons/common/logo.svg", alt="Логотип сайта")
+  ._bottom
