@@ -12,6 +12,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
 const gulpif = require('gulp-if');
 const sass = require('gulp-sass')(require('sass'));
+const pug = require('gulp-pug');
+const pugbem = require('gulp-pugbem');
 
 const isProd = process.argv.includes('--prod');
 const isDev = !isProd;
@@ -20,6 +22,15 @@ console.log(isProd);
 // clean
 const clean = () => {
   return del(['./dist'])
+}
+
+const getpug = () => {
+  return src('./src/pug/index.pug')
+    .pipe(pug({
+      pretty: true,
+      plugins: [pugbem]
+    }))
+    .pipe(dest('./src'))
 }
 
 // styles
@@ -108,6 +119,7 @@ const watchFiles = () => {
   watch('./src/scss/**/*.scss', styles)
   watch(['./src/js/**/*.js', '!./src/js/*.min.js'], scripts);
   watch('./src/img/**/*', images);
+  watch('./src/pug/**/*.pug', getpug);
 }
 
 exports.styles = styles;
@@ -115,9 +127,10 @@ exports.html = html;
 exports.scripts = scripts;
 exports.images = images;
 exports.clean = clean;
+exports.getpug = getpug;
 
 // run gulp --prod
 exports.default = series(clean, styles, html, scripts, libs, icons, fonts, favicon, images);
 
 // run gulp dev
-exports.dev = parallel(html, styles, scripts, watchFiles);
+exports.dev = parallel(getpug, html, styles, scripts, watchFiles);
