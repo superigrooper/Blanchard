@@ -1,56 +1,27 @@
 include ../../mixins/_link.pug
+include ../../mixins/_directions__item.pug
+include ../../variables/_vars-artists.pug
 
-//- Список художников и ссылки на каталог
-
-//- Realism
+//- Список направлений
 -
-  var listRealismArtists = {
-    '#tintoreto': 'Тинторетто',
-    '#friedrich': 'Фридрих',
-    '#leonardo': 'Леонардо',
-    '#verrocchio': 'Верроккьо',
-    '#tintoreto': 'Тинторетто',
-    '#friedrich': 'Фридрих',
-    '#leonardo': 'Леонардо',
-    '#verrocchio': 'Верроккьо',
-  }
-
-//- Impressionism
--
-  var listImpressionismArtists = {
-    '#monet': 'Моне',
-    '#sisley': 'Сислей',
-    '#manet': 'Мане',
-    '#renoir': 'Ренуар'
-  }
-
-//- Postimpressionism
-
--
-  var listPostimpressionismArtists = {
-    '#vangogh': 'Ван Гог',
-    '#cezanne': 'Сезанн',
-    '#gauguin': 'Гоген',
-    '#seurat': 'Сёра',
-  }
-
-//- Vanguard
-
--
-  var listVanguardArtists = {
-    '#kandinsky': 'Кандинский',
-    '#marinetti': 'Маринетти',
-    '#malevich': 'Малевич',
-  }
-
-//- Futurism
-
--
-  var listFuturismArtists = {
-    '#carra': 'Карра',
-    '#severini': 'Северини',
-    '#balla': 'Балла',
-    '#pratella': 'Прателла'
-  }
+  var directionsList = [
+    'Реализм',
+    'Импрессионизм',
+    'Постимпрессионизм',
+    'Авангард',
+    'Футуризм',
+  ]
 
 .header__bottom
+  .container.header__container.flex 
+    ul.header__directionsList.directions
+      - for (var i = 0; i < directionsList.length; i++)
+        li.directions__direction
+            button.directions__btn= directionsList[i]
+            .directions__dropdown
+              .simplebar-container
+                ul.simplebar.directions__surnames
+                  each t, n in list[i]
+                    li.directions__surname
+                      +link(n, t)(class='surnames__link')
+            
