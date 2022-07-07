@@ -1,0 +1,98 @@
+&__top
+  padding: 30px 0
+  background-color: $black
+
+&__container
+  justify-content: space-between
+  align-items: center
+
+&__logo
+  display: inline-block
+
+&__nav-wrapper
+  justify-content: space-between
+  width: 78%
+
+&__nav
+  margin-right: auto
+
+&__item:not(:last-child)
+  margin-right: 63px
+
+// Стили для ссылок навигации 
+&__link
+  position: relative
+  font-size: 18px
+  line-height: 24.5px
+  font-weight: 600
+  color: $white
+  text-decoration: none
+  z-index: 1
+  outline: none
+  transition: color 0.3s ease-in-out
+
+  // Фоновый цвет для ссылки через ::before
+  // Стили записаны в миксине ling-bg
+  &::before
+    content: ''
+    @include link-bg
+
+  // Состояния ссылки
+  // hover
+  &:hover
+    color: $header__link-hover
+
+  // focus
+  &:focus
+    // При фокусе меняем прозрачность (без миксина)
+    &::before
+      opacity: 1
+
+  // active
+  &:active
+    color: $header__link-active
+    &::before
+      opacity: 0
+
+// Стили для ссылки 'логин'
+&__login
+  position: relative
+  width: 72px
+  font-size: 18px
+  line-height: 24.5px
+  color: $white
+  text-decoration: none
+  transition: color 0.3s ease-in-out
+  outline: none
+  z-index: 1
+  svg
+    margin-right: 7px
+  path
+    transition: fill 0.3s ease-in-out
+
+  // Фоновый цвет для ссылки через ::before
+  // Стили записаны в миксине ling-bg
+  &::before
+    content: ''
+    @include link-bg
+
+  // Состояния
+  // hover
+  &:hover
+    color: $header__link-hover
+    path
+      fill: $header__link-hover
+
+  // focus
+  &:focus
+    &::before
+      opacity: 1
+
+  // active
+  &:active
+    color: $header__link-active
+    path
+      fill: $header__link-active
+    &::before
+      opacity: 0
+    
