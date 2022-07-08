@@ -1,4 +1,6 @@
 @mixin link-bg
+  // Задний фон для ссылок и кнопок
+  content: ''
   position: absolute
   z-index: -1
   top: -3px
@@ -8,4 +10,32 @@
   background-color: $header__link-focus
   opacity: 0
   transition: opacity 0.3s ease-in-out
+
+@mixin states-link-header
+  // Состояния ссылки
+  // hover
+  &:hover
+    color: $header__link-hover
+
+  // focus
+  &:focus
+    // При фокусе меняем прозрачность
+    &::before
+      opacity: 1
+
+  // active
+  &:active
+    color: $header__link-active
+    &::before
+      opacity: 0
+
+@mixin absolute-cover
+  // Общий "шаблон" для растягивания псевдоэлементов относительно родителя 
+  content: ''
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+
   

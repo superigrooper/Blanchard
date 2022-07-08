@@ -118,7 +118,7 @@ const watchFiles = () => {
   watch('./src/**/*.html', html);
   watch('./src/scss/**/*.sass', styles)
   watch(['./src/js/**/*.js', '!./src/js/*.min.js'], scripts);
-  watch('./src/img/**/*', images);
+  // gulpif(prod, watch('./src/img/**/*', images));
   watch('./src/pug/**/*.pug', getpug);
 }
 

@@ -6,20 +6,71 @@
   justify-content: space-between
   width: 65%
 
+  // Список с кнопками напрвления вынесен в отдельный блок
 .directions
 
+  &__item
+    position: relative
+
+  // Кнопка названия направления
+  &__btn
+    position: relative
+    display: flex
+    align-items: center
+    padding: 0
+    font-size: 18px
+    line-height: 24.5px   
+    color: $white
+    background-color: transparent
+    border: none
+    outline: none
+    cursor: pointer
+    transition: color 0.3s ease-in-out
+    z-index: 1
+
+    span
+      margin-right: 5px
+
+    // Задний фон через псевдоэлемент
+    &::before
+      // Задний фон для кнопки, миксин такой же и для ссылок в навигации
+      @include link-bg
+
+    // Миксин с описанием состояний ссылки/кнопки
+    @include states-link-header
+
+    svg
+      transition: transform 0.3s ease-in-out
+
+    path
+      transition: stroke 0.3s ease-in-out
+
+    // Для svg состояния пишу отдельно
+    &:hover
+      path
+        stroke: $header__link-hover
+
+    &:active
+      path
+        stroke: $header__link-active
+  &__btn--active
+    svg
+      transform: rotate(180deg)
+
+  // Блок для simplebar
   &__dropdown
     position: absolute
-    // top: 47px
-    // display: none
-    padding: 30px
+    top: -350px
+    padding: 40px
     max-width: 300px
     width: 300px
     background-color: rgba(0, 0, 0, 0.6)
+    visibility: hidden
+    transition: transform 0.3s ease-in-out,
+    transform: scale(0)
 
   .simplebar-container
     height: 240px
-    padding-right: 20px
 
   .simplebar-track.simplebar-vertical
     background-color: $black
@@ -29,6 +80,14 @@
     width: 2px
     background-color: $white
 
+  .simplebar-track
+    right: -20px
+
+  &__dropdown--active
+    top: 47px
+    transform: scale(1)
+    visibility: visible
+
   &__surname:not(:last-child)
     margin-bottom: 20px
 
@@ -37,6 +96,58 @@
     background-size: cover
     height: auto
 
-  @each $surname in (tintoretto, friedrich, leonardo, verrocchio)
-    .#{$surname}
-      background-image: url('../img/1920/dropdown/realism/#{$surname}.jpg')
+  @each $realism in (tintoretto, friedrich, leonardo, verrocchio)
+    .#{$realism}
+      background-image: url('../img/1920/dropdown/realism/#{$realism}.jpg')
+
+  @each $impressionism in (monet, sisley, manet, renoir)
+    .#{$impressionism}
+      background-image: url('../img/1920/dropdown/impressionism/#{$impressionism}.jpg')
+
+  @each $postimpressionism in (vangogh, cezanne, gauguin, seurat)
+    .#{$postimpressionism}
+      background-image: url('../img/1920/dropdown/postimpressionism/#{$postimpressionism}.jpg')
+
+  @each $avangard in (kandinsky, marinetti, malevich, picasso)
+    .#{$avangard}
+      background-image: url('../img/1920/dropdown/avangard/#{$avangard}.jpg')
+
+  @each $futurism in (carra, severini, balla, pratella)
+    .#{$futurism}
+      background-image: url('../img/1920/dropdown/futurism/#{$futurism}.jpg')
+
+  &__link
+    position: relative
+    display: block
+    padding: 10px 125px 10px 15px
+    font-size: 14px
+    font-weight: 600
+    color: $white
+    text-decoration: none
+    outline: none
+
+    &::before
+      @include absolute-cover
+      border: 2px solid $directions-link-border
+      opacity: 0
+      transition: opacity 0.3s ease-in-out
+
+    &::after
+      content: ''
+      position: absolute
+      top: 2px
+      right: 2px
+      bottom: 2px
+      left: 2px
+      background-color: $directions-link-fill
+      transition: opacity 0.1s ease-in-out
+      opacity: 0
+
+    &:hover,
+    &:focus
+      &::before
+        opacity: 1
+
+    &:active
+      &::after
+        opacity: 1

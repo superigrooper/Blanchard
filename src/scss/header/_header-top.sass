@@ -34,25 +34,9 @@
   // Фоновый цвет для ссылки через ::before
   // Стили записаны в миксине ling-bg
   &::before
-    content: ''
     @include link-bg
 
-  // Состояния ссылки
-  // hover
-  &:hover
-    color: $header__link-hover
-
-  // focus
-  &:focus
-    // При фокусе меняем прозрачность (без миксина)
-    &::before
-      opacity: 1
-
-  // active
-  &:active
-    color: $header__link-active
-    &::before
-      opacity: 0
+  @include states-link-header
 
 // Стили для ссылки 'логин'
 &__login
@@ -73,7 +57,6 @@
   // Фоновый цвет для ссылки через ::before
   // Стили записаны в миксине ling-bg
   &::before
-    content: ''
     @include link-bg
 
   // Состояния
