@@ -1,2 +1,7 @@
 mixin link(href, name)
   a(class!=attributes.class href=href)= name
+  
+mixin li()
+  li(class!=attributes.class)
+    block
+    

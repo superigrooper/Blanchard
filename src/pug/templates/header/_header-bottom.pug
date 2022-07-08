@@ -1,27 +1,16 @@
 include ../../mixins/_link.pug
-include ../../mixins/_directions__item.pug
-include ../../variables/_vars-artists.pug
-
-//- Список направлений
--
-  var directionsList = [
-    'Реализм',
-    'Импрессионизм',
-    'Постимпрессионизм',
-    'Авангард',
-    'Футуризм',
-  ]
+include ../../data/_directions-list.pug
 
 .header__bottom
   .container.header__container.flex 
-    ul.header__directionsList.directions
+    ul.header__directions-list.directions.flex
       - for (var i = 0; i < directionsList.length; i++)
-        li.directions__direction
+        li.directions__item
             button.directions__btn= directionsList[i]
             .directions__dropdown
               .simplebar-container
                 ul.simplebar.directions__surnames
                   each t, n in list[i]
-                    li.directions__surname
-                      +link(n, t)(class='surnames__link')
+                    +li(class= n.slice(1)).directions__surname
+                      +link(n, t)(class='directions__link')
             

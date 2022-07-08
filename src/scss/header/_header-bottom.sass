@@ -1,2 +1,42 @@
 &__bottom
-  
+  padding: 22px 0 22px 0
+  background-color: $header__bottom-bg
+
+&__directions-list
+  justify-content: space-between
+  width: 65%
+
+.directions
+
+  &__dropdown
+    position: absolute
+    // top: 47px
+    // display: none
+    padding: 30px
+    max-width: 300px
+    width: 300px
+    background-color: rgba(0, 0, 0, 0.6)
+
+  .simplebar-container
+    height: 240px
+    padding-right: 20px
+
+  .simplebar-track.simplebar-vertical
+    background-color: $black
+    width: 2px
+
+  .simplebar-scrollbar 
+    width: 2px
+    background-color: $white
+
+  &__surname:not(:last-child)
+    margin-bottom: 20px
+
+  &__surname
+    background-repeat: no-repeat
+    background-size: cover
+    height: auto
+
+  @each $surname in (tintoretto, friedrich, leonardo, verrocchio)
+    .#{$surname}
+      background-image: url('../img/1920/dropdown/realism/#{$surname}.jpg')
