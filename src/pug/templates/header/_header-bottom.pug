@@ -1,19 +1,34 @@
 include ../../mixins/_link.pug
+include ../../mixins/_list-item.pug
 include ../../data/_directions-list.pug
 
 .header__bottom
   .container.header__container.flex 
+
+    //- Список с кнопками названия направений
     ul.header__directions-list.directions.flex
       - for (var i = 0; i < directionsList.length; i++)
+        //- Родитель для кнопки
         li.directions__item
+
+            //- Сама кнопка с текстом из массива направлений
             button.directions__btn
               span= directionsList[i]
               svg(width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg")
                 path(d="M11 1L6 6.00001L0.999997 1" stroke="white")
+              
+            //- Контейнер для выпадающего списка и simplebar 
             .directions__dropdown
               .simplebar-container
-                ul.simplebar.directions__surnames
-                  each t, n in list[i]
-                    +li(class= n.slice(1)).directions__surname
-                      +link(n, t)(class='directions__link')
+                ul.simplebar.directions__surnames 
+                  each content, target in list[i]
+
+                    //- Миксин для элемента списка
+                    //- Имя класса берётся из списка с фамилиями художников
+                    //- Для ссылки в атрибут href идет якорная ссылка типа '#example'
+                    //- А для имени класса первый символ # удаляется и записывается в класс
+                    +list-item(class= target.slice(1)).directions__surname
+
+                      //- Миксин для ссылки, тот же самый, что и в навигации
+                      +link(content, target)(class='directions__link')
             

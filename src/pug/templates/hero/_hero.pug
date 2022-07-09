@@ -1,0 +1,15 @@
+include ../../mixins/_link.pug
+
+section.hero 
+  .swiper.hero__swiper
+    .swiper-wrapper 
+      .swiper-slide.hero__slide
+      .swiper-slide.hero__slide 
+      .swiper-slide.hero__slide 
+  .container.hero__container 
+    .hero__content 
+      h1.hero__title Прикоснитесь к прекрасному
+      p.hero__descr
+                    |  Мы вынуждены отталкиваться от того, что реализация намеченных плановых заданий создаёт предпосылки для новых предложений.
+      +link('Подписаться на рассылку', '#contacts')(class='hero__link')
+            

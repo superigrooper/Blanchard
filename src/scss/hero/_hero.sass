@@ -1,0 +1,55 @@
+.hero
+  position: relative
+  padding-top: 300px
+  min-height: 630px
+
+  &__swiper
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+
+  &__slide
+    background-repeat: no-repeat
+    background-size: cover
+    height: auto
+  
+  @for $i from 3 through 1
+    &__slide:nth-child(#{$i})
+      background-image: url('../img/1920/slider/back-#{$i}.jpg')
+
+  &__content
+    position: relative
+    padding-top: 70px
+    max-width: 600px
+    z-index: 10
+
+  &__title 
+    margin: 0
+    margin-bottom: 10px
+    font-size: 72px
+    font-weight: 700
+    line-height: 92px
+    color: $white
+
+  &__descr
+    margin: 0
+    margin-bottom: 92px
+    flex: 18
+    font-weight: 700
+    line-height: 30px
+    color: $white
+
+  &__link
+    display: inline-block
+    margin-bottom: 122px
+    padding: 22.5px 35px
+    border-radius: 100px
+    background-color: $hero__link-bg
+    font-size: 18px
+    font-weight: 700
+    line-height: 24px
+    color: $white
+    text-decoration: none
+    outline: none

@@ -8,7 +8,7 @@ include ../../data/_nav-items.pug
     include ../../components/burger/_burger.pug
 
     //- ----- Логотип ----- ->
-    a.header__logo(href="#" aria-lable="Логотип сайта")
+    a.header__logo(href="#" aria-label="Логотип сайта")
       picture 
         source(srcset="./img/icons/common/logo-1024.svg" media="(max-width: 1200px)")
         source(srcset="./img/icons/common/logo-320.svg" media="(max-width: 576px)")
@@ -18,11 +18,11 @@ include ../../data/_nav-items.pug
     .header__nav-wrapper.flex
       nav.header__nav
         ul.header__items.flex
-          each target, navItem in menuItems
+          each content, target in menuItems
             li.header__item
 
               //- ----- Миксин для сссылки ----- ->
-              +link(navItem, target)(class='header__link')
+              +link(content, target)(class='header__link')
 
       //- ----- Кнопка логин ----- ->
       a.header__login(href="" aria-label="Вход в личный кабинет")
